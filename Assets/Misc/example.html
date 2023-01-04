@@ -1,0 +1,26 @@
+<html>
+  <body></body>
+
+  <script src="https://staging.service.oreid.io/dist/oreid-js/v4/index.js"></script>
+  <script src="https://staging.service.oreid.io/dist/oreid-webpopup/v2/index.js"></script>
+
+  <script>
+
+    const appId = 't_c5509c3a78e446d78f6ed36bff4e433c'
+    const oreId = new oreidJs.OreId({ appId, plugins:{ popup: oreidJsWebPopup.WebPopup() }});
+
+    const promise = oreId.init().then(() => {
+      console.log('oreid ready')
+    }).catch((err) => {
+      console.error(err)
+    })
+    
+    function onClick() {
+      console.log(oreId)
+      oreId.popup.auth({ provider: 'google' })
+        .then(data => {console.log(data)})
+        .catch(error => {console.log(error.message)})
+    }
+  </script>
+  <button onClick="onClick()">Auth</button>
+</html>
